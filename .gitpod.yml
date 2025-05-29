@@ -1,0 +1,33 @@
+tasks:
+  - name: Setup Environment
+    init: |
+      # Install Expo CLI globally
+      npm install -g @expo/cli
+      echo "✅ Expo CLI installed"
+      
+      # Create our exercise tracker app
+      npx create-expo-app exercise-tracker --template blank-typescript
+      cd exercise-tracker
+      
+      # Install additional dependencies we'll need
+      npm install @react-navigation/native @react-navigation/bottom-tabs
+      npx expo install react-native-screens react-native-safe-area-context
+      
+      echo "✅ Exercise Tracker app created and dependencies installed"
+    
+    command: |
+      cd exercise-tracker
+      echo "🚀 Starting Expo development server..."
+      npx expo start --tunnel
+
+ports:
+  - port: 19000
+    onOpen: open-preview
+  - port: 19001
+    onOpen: ignore
+    
+vscode:
+  extensions:
+    - ms-vscode.vscode-typescript-next
+    - esbenp.prettier-vscode
+    - ms-vscode.vscode-json
